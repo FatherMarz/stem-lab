@@ -42,5 +42,5 @@ Model weights download automatically on first run and are cached (htdemucs_ft ~3
 
 ## Notes
 
-- Built as the free alternative to paid stem splitters (LALAL.ai, Moises) and audio tools like SoundSource.
+- Built as the free alternative to paid stem splitters (LALAL.ai, Moises).
 - For vocals-only / karaoke, Roformer alone is the fastest good result; the full pipeline exists for when you want the instrumental layers broken out too.
