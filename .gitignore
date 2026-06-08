@@ -1,0 +1,22 @@
+# python env
+.venv/
+__pycache__/
+*.pyc
+
+# working / output dirs
+out/
+out_rf/
+_work_rf/
+_work_ft/
+
+# audio (don't commit tracks or stems)
+*.wav
+*.mp3
+*.flac
+*.m4a
+stems/
+
+# model weights / caches
+*.ckpt
+*.th
+*.onnx

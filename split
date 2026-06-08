@@ -1,0 +1,60 @@
+#!/bin/bash
+# Split a track into 4 keeper stems and drop them in a stems/ folder beside the source.
+#   vocals  <- Mel-Band Roformer (the good one)
+#   drums   <- htdemucs_ft
+#   bass    <- htdemucs_ft
+#   other   <- htdemucs_ft  (synths / pads / ambience)
+# Discards the Roformer instrumental and the ft vocals.
+#
+# Usage:  split /path/to/recording.wav
+set -e
+
+IN="$1"
+
+if [ "$IN" = "-h" ] || [ "$IN" = "--help" ]; then
+  cat << 'HELP'
+stems - split a track into 4 stems
+
+usage: stems <audiofile>
+
+  vocals  <- Mel-Band Roformer (best vocals)
+  drums   <- htdemucs_ft
+  bass    <- htdemucs_ft
+  other   <- htdemucs_ft  (synths / pads / ambience)
+
+Stems are written to a stems/<trackname>/ folder beside the source file.
+Takes wav, mp3, flac, m4a - anything ffmpeg reads. ~6 min for a 4-min track.
+HELP
+  exit 0
+fi
+
+[ -z "$IN" ] && { echo "usage: stems <audiofile>   (stems --help for details)"; exit 1; }
+[ -f "$IN" ] || { echo "not found: $IN"; exit 1; }
+
+# resolve source paths to absolute BEFORE we cd into the tool dir
+SRCDIR="$(cd "$(dirname "$IN")" && pwd)"
+FILE="$(basename "$IN")"
+BASE="${FILE%.*}"
+IN_ABS="$SRCDIR/$FILE"
+STEMDIR="$SRCDIR/stems/$BASE"
+
+LAB="/Users/marcello/Documents/Development/personal/stem-lab"
+cd "$LAB"
+mkdir -p "$STEMDIR"
+rm -rf _work_rf _work_ft
+mkdir -p _work_rf _work_ft
+
+echo "[1/2] vocals (Mel-Band Roformer)..."
+.venv/bin/audio-separator "$IN_ABS" -m vocals_mel_band_roformer.ckpt \
+  --output_dir _work_rf --output_format WAV >/dev/null 2>&1
+cp "_work_rf/${BASE}_(vocals)_vocals_mel_band_roformer.wav" "$STEMDIR/vocals.wav"
+
+echo "[2/2] drums / bass / other (htdemucs_ft)..."
+.venv/bin/python -m demucs -d mps -n htdemucs_ft -o _work_ft "$IN_ABS" >/dev/null 2>&1
+for s in drums bass other; do
+  cp "_work_ft/htdemucs_ft/${BASE}/$s.wav" "$STEMDIR/$s.wav"
+done
+
+rm -rf _work_rf _work_ft
+echo "done -> $STEMDIR"
+ls -1 "$STEMDIR"
