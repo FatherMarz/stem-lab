@@ -8,8 +8,8 @@
 # If build/payload.tar.gz already exists it is reused instead of re-tarred.
 set -euo pipefail
 
-VERSION="1.2.0"
-ENGINE_VERSION="1.1.0"   # bump only when the payload contents change
+VERSION="1.3.0"
+ENGINE_VERSION="1.3.0"   # bump only when the payload contents change
 PKG="$(cd "$(dirname "$0")" && pwd)"
 B="$PKG/build"
 APP="$B/Stem Lab.app"
@@ -24,6 +24,8 @@ if [ ! -f "$B/payload.tar.gz" ]; then
   tar -czLf "$B/payload.tar.gz" \
     --exclude 'site-packages.pbs-orig' \
     --exclude '.DS_Store' \
+    --exclude 'diffq' \
+    --exclude 'diffq-*' \
     -C "$B/payload" .
   du -sh "$B/payload.tar.gz"
 else
@@ -39,6 +41,7 @@ printf 'APPL????' > "$APP/Contents/PkgInfo"
 printf '%s\n' "$ENGINE_VERSION" > "$APP/Contents/Resources/VERSION"
 cp "$PKG/app/AppIcon.icns" "$APP/Contents/Resources/AppIcon.icns"
 cp "$B/payload.tar.gz" "$APP/Contents/Resources/payload.tar.gz"
+cp "$PKG/../LICENSE" "$PKG/../THIRD_PARTY.md" "$APP/Contents/Resources/"
 
 cat > "$APP/Contents/Info.plist" <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
@@ -80,6 +83,7 @@ mkdir -p "$B/dmg"
 mv "$APP" "$B/dmg/"
 ln -s /Applications "$B/dmg/Applications"
 cp "$PKG/app/AppIcon.icns" "$B/dmg/.VolumeIcon.icns"
+cp "$PKG/../LICENSE" "$PKG/../THIRD_PARTY.md" "$B/dmg/"
 cat > "$B/dmg/READ ME FIRST.txt" <<'EOF'
 Stem Lab — install
 ==================
@@ -101,9 +105,9 @@ EOF
 # build RW first so the volume root can take the custom-icon Finder flag, then compress
 rm -f "$B/rw-tmp.dmg"
 hdiutil create -volname "Stem Lab" -srcfolder "$B/dmg" -ov -format UDRW "$B/rw-tmp.dmg"
-hdiutil attach "$B/rw-tmp.dmg" -nobrowse -quiet
-xattr -wx com.apple.FinderInfo 0000000000000000040000000000000000000000000000000000000000000000 "/Volumes/Stem Lab"
-hdiutil detach "/Volumes/Stem Lab" -quiet
+hdiutil attach "$B/rw-tmp.dmg" -nobrowse -quiet -mountpoint "$B/rw-mnt"
+xattr -wx com.apple.FinderInfo 0000000000000000040000000000000000000000000000000000000000000000 "$B/rw-mnt"
+hdiutil detach "$B/rw-mnt" -quiet
 hdiutil convert "$B/rw-tmp.dmg" -format UDZO -ov -o "$B/StemLab-$VERSION.dmg"
 rm -f "$B/rw-tmp.dmg"
 du -sh "$B/StemLab-$VERSION.dmg"

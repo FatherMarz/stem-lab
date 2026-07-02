@@ -61,3 +61,9 @@ See the header comments in `packaging/build-app.sh` for the staged-payload prere
 
 - Built as the free alternative to paid stem splitters (LALAL.ai, Moises).
 - For vocals-only / karaoke, Roformer alone is the fastest good result; the full pipeline exists for when you want the instrumental layers broken out too.
+
+## License
+
+MIT for everything in this repo — see [LICENSE](LICENSE). The DMG bundles third-party
+models, packages, and an FFmpeg build under their own licenses, all verified and listed
+in [THIRD_PARTY.md](THIRD_PARTY.md).
