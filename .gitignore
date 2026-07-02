@@ -27,3 +27,6 @@ stems/
 packaging/build/
 
 .DS_Store
+
+# vercel
+site/.vercel/
