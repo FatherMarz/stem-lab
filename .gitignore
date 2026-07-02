@@ -8,6 +8,8 @@ out/
 out_rf/
 _work_rf/
 _work_ft/
+.last_rf.log
+.last_ft.log
 
 # audio (don't commit tracks or stems)
 *.wav
