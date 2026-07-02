@@ -76,7 +76,7 @@ h1 .o{color:rgb(var(--other))}
 
 /* waveform */
 .wave{margin:44px 0 8px;display:flex;flex-direction:column;gap:14px}
-.wave-row{display:flex;align-items:center;gap:6px;height:34px}
+.wave-row{display:flex;align-items:center;gap:5px;height:46px}
 .wave-row i{
   flex:1;border-radius:99px;background:currentColor;
   height:calc(var(--h) * 100%);
@@ -257,7 +257,7 @@ footer a:hover{color:rgb(var(--text))}
 // deterministic waveform bars, same silhouette family as the app icon
 const wave = [.30,.55,.42,.78,1,.66,.88,.5,.72,.38,.6,.45,.28,.52,.8,.36,.64,.9,.48,.7,.34,.58,.44,.76,.32];
 document.querySelectorAll('.wave-row').forEach((row, r) => {
-  for (let k = 0; k < 25; k++) {
+  for (let k = 0; k < 72; k++) {
     const bar = document.createElement('i');
     const h = wave[(k + r * 6) % wave.length];
     bar.style.setProperty('--h', h.toFixed(2));
