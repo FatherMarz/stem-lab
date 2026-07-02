@@ -42,6 +42,7 @@ printf '%s\n' "$ENGINE_VERSION" > "$APP/Contents/Resources/VERSION"
 cp "$PKG/app/AppIcon.icns" "$APP/Contents/Resources/AppIcon.icns"
 cp "$B/payload.tar.gz" "$APP/Contents/Resources/payload.tar.gz"
 cp "$PKG/../LICENSE" "$PKG/../THIRD_PARTY.md" "$APP/Contents/Resources/"
+cp -R "$PKG/../licenses" "$APP/Contents/Resources/licenses"
 
 cat > "$APP/Contents/Info.plist" <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
@@ -84,6 +85,7 @@ mv "$APP" "$B/dmg/"
 ln -s /Applications "$B/dmg/Applications"
 cp "$PKG/app/AppIcon.icns" "$B/dmg/.VolumeIcon.icns"
 cp "$PKG/../LICENSE" "$PKG/../THIRD_PARTY.md" "$B/dmg/"
+cp -R "$PKG/../licenses" "$B/dmg/licenses"
 cat > "$B/dmg/READ ME FIRST.txt" <<'EOF'
 Stem Lab — install
 ==================

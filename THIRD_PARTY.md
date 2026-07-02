@@ -41,12 +41,22 @@ machine under its own non-commercial license.
 ## FFmpeg
 
 The DMG bundles `ffmpeg`/`ffprobe` binaries and their dylib closure from the Homebrew
-build of **FFmpeg 8** — licensed **GPL-3.0-or-later** as built (includes GPL x264/x265;
-also SVT-AV1, libvpx, dav1d, opus, libvmaf under BSD-family licenses; LAME under LGPL;
-OpenSSL under Apache-2.0). FFmpeg is used unmodified. Corresponding sources:
-[ffmpeg.org/download](https://ffmpeg.org/download.html) and the pinned
-[Homebrew formula](https://github.com/Homebrew/homebrew-core/blob/master/Formula/f/ffmpeg.rb);
-build configuration is reproducible via `brew install ffmpeg`.
+build of **FFmpeg 8.1.2** — licensed **GPL-3.0-or-later** as built (includes GPL-2.0-or-later
+x264/x265; also SVT-AV1, libvpx, dav1d, opus, libvmaf under BSD-family licenses; LAME under
+LGPL; OpenSSL under Apache-2.0). FFmpeg is used unmodified, as separate executables and
+dynamically loaded libraries.
+
+Full GPL-3.0, LGPL-3.0, and LGPL-2.1 license texts ship in [`licenses/`](licenses/) in this
+repository, at the root of the DMG, and inside the app bundle.
+
+**Corresponding source** for the GPL/LGPL components (exact versions as bundled):
+[FFmpeg 8.1.2 source](https://ffmpeg.org/releases/ffmpeg-8.1.2.tar.xz) ·
+[x264](https://code.videolan.org/videolan/x264) · [x265](https://bitbucket.org/multicoreware/x265_git) ·
+[LAME](https://sourceforge.net/projects/lame/) · [libsoxr](https://sourceforge.net/projects/soxr/) —
+built unmodified per the pinned
+[Homebrew formula](https://github.com/Homebrew/homebrew-core/blob/master/Formula/f/ffmpeg.rb),
+which is the complete build recipe. These components are dynamically linked/executed, so any
+of them can be replaced by a user-supplied build.
 
 ## Site
 
