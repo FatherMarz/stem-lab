@@ -22,3 +22,8 @@ stems/
 *.ckpt
 *.th
 *.onnx
+
+# packaging build artifacts
+packaging/build/
+
+.DS_Store

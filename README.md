@@ -11,6 +11,12 @@ Local audio stem splitter for macOS (Apple Silicon). Splits a track into four st
 
 It discards the weaker outputs (Roformer's instrumental, Demucs' vocals) and keeps only the best version of each stem. Everything runs locally on the GPU (MPS) — nothing is uploaded.
 
+## Download the App
+
+No terminal, no setup: **[⬇ StemLab-1.2.0.dmg](https://github.com/FatherMarz/stem-lab/releases/latest/download/StemLab-1.2.0.dmg)** (1.3 GB, Apple Silicon only — newer builds under [Releases](https://github.com/FatherMarz/stem-lab/releases)).
+
+Drag *Stem Lab* to Applications, open it once via System Settings → Privacy & Security → "Open Anyway" (it's unsigned), then drop any song on the window or icon. Stems land in a `stems/` folder next to the song. Fully offline.
+
 ## Usage
 
 ```bash
@@ -39,6 +45,17 @@ alias stems='/path/to/stem-lab/split'
 ```
 
 Model weights download automatically on first run and are cached (htdemucs_ft ~320MB, Roformer ~200MB).
+
+## Packaging the App
+
+The distributable DMG (native SwiftUI wrapper + fully self-contained runtime: standalone CPython, model weights, ffmpeg dylibs) is built from `packaging/`:
+
+```bash
+packaging/collect-ffmpeg.sh   # stage the Homebrew ffmpeg dylib closure
+packaging/build-app.sh        # payload tarball + Stem Lab.app + DMG
+```
+
+See the header comments in `packaging/build-app.sh` for the staged-payload prereqs. Bump `ENGINE_VERSION` only when payload contents change — that's what triggers the 2.3 GB runtime reinstall on users' machines.
 
 ## Notes
 
