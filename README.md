@@ -13,7 +13,7 @@ It discards the weaker outputs (Roformer's instrumental, Demucs' vocals) and kee
 
 ## Download the App
 
-No terminal, no setup: **[⬇ StemLab-1.2.0.dmg](https://github.com/FatherMarz/stem-lab/releases/latest/download/StemLab-1.2.0.dmg)** (1.3 GB, Apple Silicon only — newer builds under [Releases](https://github.com/FatherMarz/stem-lab/releases)).
+No terminal, no setup: **[⬇ StemLab.dmg](https://github.com/FatherMarz/stem-lab/releases/latest/download/StemLab.dmg)** (1.3 GB, Apple Silicon only — newer builds under [Releases](https://github.com/FatherMarz/stem-lab/releases)).
 
 Drag *Stem Lab* to Applications, open it once via System Settings → Privacy & Security → "Open Anyway" (it's unsigned), then drop any song on the window or icon. Stems land in a `stems/` folder next to the song. Fully offline.
 
