@@ -1,0 +1,38 @@
+# Stem Lab
+
+> Stem Lab is a free, open-source stem splitter for Apple Silicon Macs. It
+> splits any song into four stems: vocals, drums, bass and other.
+
+The app is a single macOS download. Drop a song on it; the stems land in a
+folder next to the original file. No account, no upload, no cost.
+
+## What it does
+
+- Splits a song into vocals.wav, drums.wav, bass.wav and other.wav.
+- Vocals come from a Mel-Band Roformer model. Drums, bass and other come from
+  htdemucs_ft. Both models run in parallel and the best output wins per stem.
+- Accepts wav, mp3, flac and m4a input.
+- A 4-minute song takes about 5 minutes to process.
+
+## Requirements
+
+- Apple Silicon Mac (M1 or newer), macOS 13 or later.
+- Runs entirely on the Mac's own GPU. Fully offline: no uploads, no account,
+  no telemetry.
+
+## Cost and licence
+
+- Free. Current release is v1.3.0, a 1.3 GB DMG.
+- Open source under the MIT licence.
+- The app is unsigned, so macOS requires "Open Anyway" in
+  System Settings → Privacy & Security on first launch.
+
+## Links
+
+- [Download](https://github.com/FatherMarz/stem-lab/releases/latest/download/StemLab.dmg): latest DMG for Mac.
+- [Source](https://github.com/FatherMarz/stem-lab): full pipeline, open source.
+- [Licence](https://github.com/FatherMarz/stem-lab/blob/main/LICENSE): MIT.
+
+## Contact
+
+Built by Father Marz. See https://www.modul4r.com/ for other projects.
