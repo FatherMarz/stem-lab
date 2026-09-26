@@ -15,7 +15,7 @@
 <meta name="twitter:title" content="Stem Lab | Home">
 <meta name="twitter:description" content="Split any song into vocals, drums, bass & other. Offline, on your Mac, free.">
 <meta name="twitter:image" content="https://stems.modul4r.com/og.png">
-<meta name="theme-color" content="#242721">
+<meta name="theme-color" content="#19182e">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -64,13 +64,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg: 36 39 33;
-  --surface: 52 56 47;
-  --surface-deep: 30 33 28;
-  --text: 232 229 217;
-  --muted: 160 158 143;
-  --border: 94 99 83;
-  --accent: 214 156 74;
+  /* Stem Lab's own colours, taken from its app icon: indigo night, a lavender
+     mark, and the four stem colours doing the talking. */
+  --bg: 25 24 46;
+  --surface: 36 34 64;
+  --surface-deep: 19 18 36;
+  --text: 236 235 247;
+  --muted: 163 161 191;
+  --border: 62 58 104;
+  --accent: 172 158 255;
+  --ink: 20 18 42;
   --vocals: 83 199 240;
   --drums: 242 176 78;
   --bass: 239 106 158;
@@ -164,15 +167,15 @@ h1 .o{color:rgb(var(--other))}
 .dl-btn{
   display:inline-block;
   font-family:var(--font-mono);font-weight:700;font-size:16px;letter-spacing:.08em;
-  background:rgb(var(--accent));color:rgb(26 28 23);
+  background:rgb(var(--accent));color:rgb(var(--ink));
   text-decoration:none;padding:18px 34px;
-  border:2px solid rgb(26 28 23);
-  box-shadow:4px 4px 0 0 rgb(26 28 23);
+  border:2px solid rgb(var(--ink));
+  box-shadow:4px 4px 0 0 rgb(var(--ink));
   transition:transform .12s ease, box-shadow .12s ease;
   white-space:nowrap;
 }
-.dl-btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 0 rgb(26 28 23)}
-.dl-btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 0 rgb(26 28 23)}
+.dl-btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 0 rgb(var(--ink))}
+.dl-btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 0 rgb(var(--ink))}
 .dl-meta{font-family:var(--font-mono);font-size:12.5px;color:rgb(var(--muted));line-height:2}
 .dl-meta b{color:rgb(var(--text));font-weight:500}
 .gatekeeper{
