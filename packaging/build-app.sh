@@ -8,8 +8,8 @@
 # If build/payload.tar.gz already exists it is reused instead of re-tarred.
 set -euo pipefail
 
-VERSION="1.3.0"
-ENGINE_VERSION="1.3.0"   # bump only when the payload contents change
+VERSION="1.3.1"
+ENGINE_VERSION="1.3.1"   # bump only when the payload contents change (1.3.1: forces a clean unpack to restore engine files macOS blocked)
 PKG="$(cd "$(dirname "$0")" && pwd)"
 B="$PKG/build"
 APP="$B/Stem Lab.app"
