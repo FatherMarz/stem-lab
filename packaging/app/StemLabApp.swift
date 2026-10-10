@@ -193,6 +193,19 @@ final class JobController: ObservableObject {
             do { try tar.run() } catch { fail("Could Not Unpack the Audio Engine", error.localizedDescription); return }
             tar.waitUntilExit()
             guard tar.terminationStatus == 0 else { fail("Audio Engine Unpack Failed", ""); return }
+            // files written by a quarantined app inherit the quarantine flag, and Gatekeeper
+            // then blocks every bundled dylib and binary one by one; the user already approved the app.
+            // Homebrew dylibs ship read-only, so make them writable first.
+            let chmod = Process()
+            chmod.executableURL = URL(fileURLWithPath: "/bin/chmod")
+            chmod.arguments = ["-R", "u+w", Paths.dest.path]
+            try? chmod.run()
+            chmod.waitUntilExit()
+            let unq = Process()
+            unq.executableURL = URL(fileURLWithPath: "/usr/bin/xattr")
+            unq.arguments = ["-dr", "com.apple.quarantine", Paths.dest.path]
+            try? unq.run()
+            unq.waitUntilExit()
             // the tarball may carry an older VERSION file; the app decides the installed version
             try? Paths.bundledVersion.write(
                 to: Paths.dest.appendingPathComponent("VERSION"), atomically: true, encoding: .utf8)
