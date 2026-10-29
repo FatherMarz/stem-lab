@@ -77,7 +77,7 @@ EOF
 
 step "codesign (Developer ID)"
 SIGN_ID="${SIGN_ID:-Developer ID Application: Marcello Delcaro (KDLKFK58UU)}"
-codesign --force --deep -s "$SIGN_ID" "$APP"
+codesign --force --deep --options runtime -s "$SIGN_ID" --timestamp "$APP"
 codesign --verify --deep "$APP"
 
 step "dmg"
