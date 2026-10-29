@@ -75,8 +75,10 @@ cat > "$APP/Contents/Info.plist" <<EOF
 </plist>
 EOF
 
-step "codesign (ad-hoc)"
-codesign -s - --force --deep "$APP"
+step "codesign (Developer ID)"
+SIGN_ID="${SIGN_ID:-Developer ID Application: Marcello Delcaro (KDLKFK58UU)}"
+codesign --force --deep -s "$SIGN_ID" "$APP"
+codesign --verify --deep "$APP"
 
 step "dmg"
 rm -rf "$B/dmg"
@@ -112,5 +114,7 @@ xattr -wx com.apple.FinderInfo 0000000000000000040000000000000000000000000000000
 hdiutil detach "$B/rw-mnt" -quiet
 hdiutil convert "$B/rw-tmp.dmg" -format UDZO -ov -o "$B/StemLab-$VERSION.dmg"
 rm -f "$B/rw-tmp.dmg"
+codesign --force -s "$SIGN_ID" "$B/StemLab-$VERSION.dmg"
+codesign --verify "$B/StemLab-$VERSION.dmg"
 du -sh "$B/StemLab-$VERSION.dmg"
 printf '\n✓ built %s\n' "$B/StemLab-$VERSION.dmg"
